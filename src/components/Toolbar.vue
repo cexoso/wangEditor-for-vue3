@@ -2,7 +2,7 @@
   <div ref="selector"></div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, watchEffect, PropType } from 'vue'
+import { defineComponent, ref, watchEffect, PropType, toRaw } from 'vue'
 import { createToolbar, IToolbarConfig, IDomEditor, DomEditor } from '@wangeditor/editor'
 
 export default defineComponent({
@@ -47,7 +47,7 @@ export default defineComponent({
     watchEffect( () => {
       const { editor } = props
       if (editor == null) return
-      create(editor) // 初始化 toolbar
+      create(toRaw(editor)) // 初始化 toolbar
     })
 
     return {
